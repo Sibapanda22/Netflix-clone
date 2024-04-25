@@ -1,4 +1,4 @@
-Pipeline    {
+pipeline    {
     agent any
     tools{
         tool name: 'jdk17', type: 'jdk'
