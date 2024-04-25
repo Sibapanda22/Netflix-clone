@@ -20,7 +20,7 @@ pipeline    {
         }
         stage('Sonarqube Analysis'){
             steps{
-                withSonarQubeEnv(credentialsId: 'sonar-token') {
+                withSonarQubeEnv('sonar-server'){
             //         sonar-scanner \
             //          -Dsonar.projectKey=Netflix_clone \
             //          -Dsonar.sources=. \
