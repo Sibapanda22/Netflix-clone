@@ -1,8 +1,8 @@
 pipeline    {
     agent any
     tools{
-        tool name: 'jdk17', type: 'jdk'
-        tool name: 'Node16', type: 'nodejs'
+        jdk 'jdk17'
+        nodejs 'Node16'
     }
     environment{
         SCANNER_HOME=tool 'sonar-scanner'
@@ -18,7 +18,7 @@ pipeline    {
                 git branch: 'siba_dev', url: 'https://github.com/Sibapanda22/Netflix-clone.git'
             }
         }
-        stage('Sonarqube Analysis')
+        stage('Sonarqube Analysis'){
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar-token') {
             //         sonar-scanner \
@@ -30,6 +30,8 @@ pipeline    {
             sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Netflix_clone \
                     -Dsonar.projectKey=Netflix_clone '''
             }
+          }
+        }
         stage('Quality Gate'){
             steps{
                 scripts{
@@ -45,4 +47,3 @@ pipeline    {
         
         }
     }
-}
